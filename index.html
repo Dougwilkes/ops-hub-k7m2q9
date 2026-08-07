@@ -1,0 +1,612 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Wilkes Accounting Operations Hub</title><script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"neutral"});</script></head><body><title>Wilkes Portfolio — Accounting Operations Hub</title>
+<style>
+  :root {
+    --ground: #F6F5F0;
+    --surface: #FFFFFF;
+    --panel: #EFEFE7;
+    --ink: #1E2A25;
+    --ink-2: #4A5A52;
+    --ink-3: #7A8880;
+    --line: #DCDCD2;
+    --brand: #1F3B33;
+    --accent: #3E7C59;
+    --accent-ink: #2C6145;
+    --y2025: #2E5D4B;
+    --y2026: #9DBFAE;
+    --high: #A8452E;
+    --high-bg: #F6E3DD;
+    --med: #9A6B14;
+    --med-bg: #F5EAD3;
+    --low: #6B7A72;
+    --low-bg: #E8EBE6;
+    --done: #2C6145;
+    --done-bg: #DFEBE2;
+    --link: #2C6145;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #121815;
+      --surface: #1A231F;
+      --panel: #202B26;
+      --ink: #E3EAE5;
+      --ink-2: #A9B8B0;
+      --ink-3: #75847C;
+      --line: #2C3833;
+      --brand: #C9DCD1;
+      --accent: #7FB89A;
+      --accent-ink: #8FC4A7;
+      --y2025: #6FA98C;
+      --y2026: #33574A;
+      --high: #E08B74;
+      --high-bg: #3A241E;
+      --med: #D9A960;
+      --med-bg: #362C18;
+      --low: #93A29A;
+      --low-bg: #263029;
+      --done: #8FC4A7;
+      --done-bg: #1F3229;
+      --link: #8FC4A7;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #121815; --surface: #1A231F; --panel: #202B26;
+    --ink: #E3EAE5; --ink-2: #A9B8B0; --ink-3: #75847C; --line: #2C3833;
+    --brand: #C9DCD1; --accent: #7FB89A; --accent-ink: #8FC4A7;
+    --y2025: #6FA98C; --y2026: #33574A;
+    --high: #E08B74; --high-bg: #3A241E; --med: #D9A960; --med-bg: #362C18;
+    --low: #93A29A; --low-bg: #263029; --done: #8FC4A7; --done-bg: #1F3229; --link: #8FC4A7;
+  }
+  :root[data-theme="light"] {
+    --ground: #F6F5F0; --surface: #FFFFFF; --panel: #EFEFE7;
+    --ink: #1E2A25; --ink-2: #4A5A52; --ink-3: #7A8880; --line: #DCDCD2;
+    --brand: #1F3B33; --accent: #3E7C59; --accent-ink: #2C6145;
+    --y2025: #2E5D4B; --y2026: #9DBFAE;
+    --high: #A8452E; --high-bg: #F6E3DD; --med: #9A6B14; --med-bg: #F5EAD3;
+    --low: #6B7A72; --low-bg: #E8EBE6; --done: #2C6145; --done-bg: #DFEBE2; --link: #2C6145;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  h1, h2, h3 { font-family: Charter, "Bitstream Charter", Cambria, Georgia, serif; text-wrap: balance; }
+  a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* masthead */
+  .masthead { border-bottom: 3px double var(--line); padding: 40px 0 22px; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: 11.5px; color: var(--accent-ink); font-weight: 600; }
+  .masthead h1 { font-size: clamp(28px, 4.6vw, 42px); margin: 8px 0 10px; color: var(--brand); line-height: 1.12; }
+  .masthead p { max-width: 62ch; color: var(--ink-2); margin: 0; }
+  .stamp { margin-top: 12px; font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+  /* nav */
+  nav.toc { position: sticky; top: 0; z-index: 30; background: var(--ground); border-bottom: 1px solid var(--line); margin: 0 -24px; padding: 0 24px; }
+  nav.toc .row { display: flex; gap: 4px; overflow-x: auto; padding: 8px 0; }
+  nav.toc a { white-space: nowrap; text-decoration: none; color: var(--ink-2); font-size: 13px; padding: 5px 11px; border-radius: 999px; border: 1px solid transparent; }
+  nav.toc a:hover { border-color: var(--line); background: var(--surface); color: var(--ink); }
+
+  section { padding-top: 44px; scroll-margin-top: 56px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 18px; }
+  .sec-head h2 { font-size: 24px; margin: 0; color: var(--brand); }
+  .sec-head .sub { color: var(--ink-3); font-size: 13px; }
+  .note { color: var(--ink-2); font-size: 13.5px; max-width: 72ch; }
+
+  /* stat band */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 26px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px 12px; }
+  .stat .n { font-family: Charter, Cambria, Georgia, serif; font-size: 30px; font-weight: 700; color: var(--brand); font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .stat .l { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+  .stat .d { font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+  /* panels & diagrams */
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .diagram { background: #FAFAF5; border: 1px solid var(--line); border-radius: 10px; padding: 14px; overflow-x: auto; }
+  .diagram-cap { font-size: 12px; color: var(--ink-3); margin: 6px 4px 0; }
+  pre.mermaid { margin: 0; display: flex; justify-content: center; }
+
+  /* tables */
+  .tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.nowrap { white-space: nowrap; }
+  tbody tr:hover { background: color-mix(in srgb, var(--panel) 55%, transparent); }
+
+  /* chips */
+  .chip { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+  .chip.high { background: var(--high-bg); color: var(--high); }
+  .chip.med  { background: var(--med-bg);  color: var(--med); }
+  .chip.low  { background: var(--low-bg);  color: var(--low); }
+  .chip.open { background: var(--med-bg);  color: var(--med); }
+  .chip.done { background: var(--done-bg); color: var(--done); }
+  .chip.ongoing { background: var(--low-bg); color: var(--low); }
+
+  /* bar chart */
+  .chart { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+  .chart h3 { margin: 0 0 4px; font-size: 16px; }
+  .chart .chart-sub { font-size: 12.5px; color: var(--ink-3); margin-bottom: 14px; }
+  .bar-row { display: grid; grid-template-columns: 210px 1fr 58px; gap: 10px; align-items: center; padding: 5px 0; }
+  .bar-row .lbl { font-size: 13px; color: var(--ink-2); text-align: right; }
+  .bar-row .lbl b { color: var(--ink); font-weight: 600; }
+  .bar-track { display: flex; gap: 2px; height: 18px; }
+  .seg { border-radius: 0 4px 4px 0; min-width: 3px; position: relative; }
+  .seg:first-child { border-radius: 4px 0 0 4px; }
+  .seg:only-child { border-radius: 4px; }
+  .seg.s25 { background: var(--y2025); }
+  .seg.s26 { background: var(--y2026); }
+  .seg:hover::after {
+    content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: var(--brand); color: var(--ground); font-size: 11.5px; padding: 4px 9px; border-radius: 6px; white-space: nowrap; z-index: 5;
+  }
+  :root[data-theme="dark"] .seg:hover::after { background: #E3EAE5; color: #121815; }
+  .bar-row .val { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+  .legend { display: flex; gap: 18px; margin-top: 12px; font-size: 12.5px; color: var(--ink-2); }
+  .legend .key { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .swatch.s25 { background: var(--y2025); }
+  .swatch.s26 { background: var(--y2026); }
+
+  /* role cards */
+  .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .role { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; border-top: 3px solid var(--accent); }
+  .role h3 { margin: 0; font-size: 16px; }
+  .role .who { font-size: 12px; color: var(--ink-3); margin: 2px 0 10px; }
+  .role ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 13.5px; }
+  .role li { margin: 4px 0; }
+
+  /* link list */
+  .doclist { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+  .doc { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 11px 14px; font-size: 13.5px; }
+  .doc a { font-weight: 600; }
+  .doc .d { color: var(--ink-3); font-size: 12.5px; margin-top: 2px; }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 13.5px; color: var(--ink-2); }
+  .callout b { color: var(--ink); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } .bar-row { grid-template-columns: 120px 1fr 52px; } }
+
+  ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  ol.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px 10px 46px; position: relative; font-size: 13.5px; color: var(--ink-2); }
+  ol.steps li::before { content: counter(s); position: absolute; left: 13px; top: 10px; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: var(--ground); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; }
+  :root[data-theme="dark"] ol.steps li::before { background: var(--accent); color: #121815; }
+  ol.steps b { color: var(--ink); }
+
+  footer { margin-top: 60px; border-top: 1px solid var(--line); padding-top: 14px; font-size: 12px; color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Wilkes Company LLC &amp; Portfolio</div>
+    <h1>Accounting Operations Hub</h1>
+    <p>The shared map of how the books get clean and stay clean: what each entity is, how the weekly
+    data pipeline runs, who does what, and every open work item — with links to the live workbook
+    where the actual assignments live.</p>
+    <div class="stamp">Snapshot of 8/4/2026 · The <a href="https://docs.google.com/spreadsheets/d/1yReTdhwFZmGu2diE9Ygc0SlUNFeXF7Yq/edit" target="_blank" rel="noopener">Classification Review workbook</a> is the live source of truth</div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">1,194</div><div class="l">Flagged transactions to classify</div><div class="d">802 from 2025 · 392 from 2026 YTD</div></div>
+      <div class="stat"><div class="n">46</div><div class="l">Account-level issues</div><div class="d">severity-ranked, with fixes</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">Forensic findings</div><div class="d">from lifetime general ledgers</div></div>
+      <div class="stat"><div class="n">25 / 25</div><div class="l">Owner questions answered</div><div class="d">rulings settled, cited by #</div></div>
+      <div class="stat"><div class="n">15</div><div class="l">Phase-1 quick wins queued</div><div class="d">≈ one focused bookkeeping day</div></div>
+    </div>
+  </header>
+
+  <nav class="toc"><div class="row">
+    <a href="#entities">Entities</a>
+    <a href="#pipeline">Weekly pipeline</a>
+    <a href="#roles">Who does what</a>
+    <a href="#workload">Workload</a>
+    <a href="#vre2024">VRE 2024</a>
+    <a href="#phase1">Phase 1</a>
+    <a href="#rulings">Settled rulings</a>
+    <a href="#forensics">Forensics</a>
+    <a href="#docs">Documents</a>
+    <a href="#howto">Working here</a>
+  </div></nav>
+
+  <section id="entities">
+    <div class="sec-head"><h2>The entity map</h2><div class="sub">six companies, one owner-side hub</div></div>
+    <div class="diagram">
+      <pre class="mermaid">
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#E7EFE9","primaryTextColor":"#1E2A25","primaryBorderColor":"#3E7C59","lineColor":"#5D7A6C","secondaryColor":"#F1EDE2","tertiaryColor":"#FAFAF5","fontFamily":"Segoe UI, sans-serif","fontSize":"13px"}}}%%
+flowchart TD
+  DOUG["Doug Wilkes — owner"]
+  WCO["WCO · Wilkes Company LLC (S-corp)"]
+  VRE["VRE · Velocity Real Estate — 5 rentals"]
+  VROI["VROI · Velocity ROI — land flips"]
+  VEQ["VEQ · Vero Equity — agent team"]
+  MAXIE["227 Maxie Road LLC — land"]
+  ALI["ALI · Artisan Logistics (C-corp)"]
+  WOLFE(["Randy Wolfe"])
+  GREG(["Gregory Wilkins"])
+  KELLY(["Susan Camp Kelly Family Trust"])
+  IAN(["Ian McCroskey"])
+  DOUG -->|"100%"| WCO
+  WCO -->|"50%"| VRE
+  WCO -->|"50%"| VROI
+  WCO -->|"50%"| VEQ
+  WCO -->|"1/3"| MAXIE
+  WCO -->|"50%"| ALI
+  WOLFE -->|"50%"| VRE
+  WOLFE -->|"50%"| VROI
+  GREG -->|"50%"| VEQ
+  GREG -->|"1/3"| MAXIE
+  KELLY -->|"1/3"| MAXIE
+  IAN -->|"50%"| ALI
+      </pre>
+      <div class="diagram-cap">Every percentage sits on its own line: 227 Maxie Road is one-third each to Wilkes Company, Gregory Wilkins, and the Susan Camp Kelly Family Trust (no QBO file yet — land bought 4/2025).
+      Books basis: WCO/VRE/VROI accrual · VEQ and ALI cash · Cathy Batson keeps ALI's books. Partnerships flow to Wilkes Company by K-1; WCO flows to Doug's 1040 as an S-corp.
+      VEQ partner checks are distributions, never income at WCO (ruling Q&amp;A #6/#13).</div>
+    </div>
+
+    <div style="height:16px"></div>
+
+    <div class="diagram">
+      <pre class="mermaid">
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#E7EFE9","primaryTextColor":"#1E2A25","primaryBorderColor":"#3E7C59","lineColor":"#5D7A6C","fontFamily":"Segoe UI, sans-serif","fontSize":"13px"}}}%%
+flowchart LR
+  SVR["Southern Visions Realty — commissions"] --> VEQ["VEQ"]
+  VEQ -->|"partner distributions"| WCO["WCO"]
+  VEQ -->|"distributions"| GREG["Gregory / FourSix Dev"]
+  WCO -->|"$800/mo owner contribution"| VROI["VROI"]
+  WOLFE2["Wolfe Mgmt"] -->|"$800/mo"| VROI
+  WCO -->|"contributions (tenant costs)"| VRE["VRE"]
+  HELOC["HELOC — Doug's personal name, all proceeds business"] -->|"draws"| WCO
+  RENT["1335 Camping Rd rent — Doug's personal rental"] --> WCO
+      </pre>
+      <div class="diagram-cap">The recurring money flows the books must reflect. Nothing between WCO and VROI/VRE is a loan — they are owner capital contributions (rulings Q&amp;A #8, #11, #12).</div>
+    </div>
+  </section>
+
+  <section id="pipeline">
+    <div class="sec-head"><h2>The weekly data pipeline</h2><div class="sub">runs every Monday, hands-free</div></div>
+    <div class="diagram">
+      <pre class="mermaid">
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#E7EFE9","primaryTextColor":"#1E2A25","primaryBorderColor":"#3E7C59","lineColor":"#5D7A6C","fontFamily":"Segoe UI, sans-serif","fontSize":"13px"}}}%%
+flowchart LR
+  QBO["QuickBooks Online — BS, P&amp;L, GL, TB per entity"]
+  GM["Gmail — wilkesed@gmail.com"]
+  ZAP["Zapier"]
+  INBOX["Drive: Accounting/Inbox"]
+  CLAUDE["Claude — identifies, renames, files"]
+  FOLDERS["Entity/Year folders"]
+  LOGCSV["Logs/filing_log.csv"]
+  WB["Workbook refresh"]
+  QBO -->|"Mon a.m."| GM --> ZAP --> INBOX --> CLAUDE --> FOLDERS
+  CLAUDE --> LOGCSV
+  FOLDERS --> WB
+      </pre>
+      <div class="diagram-cap">File naming: <code>CODE_ReportType_PeriodEnd.xlsx</code> (e.g. VRE_TrialBalance_2025-12-31.xlsx). Duplicates are hash-checked and parked; nothing is ever overwritten.</div>
+    </div>
+
+    <div style="height:16px"></div>
+    <div class="callout"><b>What this means for Dave and David:</b> you never have to ask for reports. Fresh
+    balance sheets, P&amp;Ls, general ledgers, and trial balances for every entity land in the shared Drive
+    folder every Monday, filed and named consistently, going back through each company's full history —
+    including lifetime general ledgers for the forensic work.</div>
+  </section>
+
+  <section id="roles">
+    <div class="sec-head"><h2>Who does what</h2><div class="sub">the division-of-labor rule</div></div>
+    <div class="roles">
+      <div class="role">
+        <h3>Doug Wilkes</h3><div class="who">Owner · dwilkes@svrealty.com</div>
+        <ul>
+          <li>Answers fact questions, supplies documents</li>
+          <li>Keeps the REPS hours log and MileIQ current</li>
+          <li>Routes questions and handoffs between Dave and David</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h3>Dave Unger</h3><div class="who">Bookkeeper · DTU Financial · dave@dtu-fin.com</div>
+        <ul>
+          <li>Executes the corrections: reclasses, missing entries, close-outs</li>
+          <li>Works the Phase-1 list, then Account Issues by severity</li>
+          <li>Marks status on the workbook's Assignments &amp; Notes tab</li>
+        </ul>
+      </div>
+      <div class="role">
+        <h3>David Enzastiga</h3><div class="who">CPA · Rish &amp; Enzastiga · david@rishcpa.com</div>
+        <ul>
+          <li>Rules on tax character and treatment; owns returns 2025+ and the 2024 VRE/VROI amendments</li>
+          <li>Note-sale gain calc, vehicle deductions, seller-financed land treatment</li>
+          <li>2026 planning: cost segregation, REPS, Roth strategy</li>
+        </ul>
+      </div>
+    </div>
+    <div style="height:14px"></div>
+    <div class="callout">Everyone works from one queue: the <b>Assignments &amp; Notes tab</b> of the workbook.
+    Dave and David add rows to assign items to Doug (or each other); Doug marks status. Questions and
+    handoffs route through Doug rather than assuming direct contact.</div>
+  </section>
+
+  <section id="workload">
+    <div class="sec-head"><h2>Where the cleanup work sits</h2><div class="sub">flagged general-ledger transactions, by entity and year</div></div>
+    <div class="two-col">
+      <div class="chart">
+        <h3>Transactions to classify — 1,194 total</h3>
+        <div class="chart-sub">Every flagged row is listed in the workbook's “Transactions to Classify” tab with a suggested action. Hover a segment for the split.</div>
+        <div class="bar-row"><div class="lbl"><b>WCO</b> Wilkes Company</div>
+          <div class="bar-track"><div class="seg s25" style="width:71.3%" data-tip="2025: 452"></div><div class="seg s26" style="width:28.7%" data-tip="2026 YTD: 182"></div></div>
+          <div class="val">634</div></div>
+        <div class="bar-row"><div class="lbl"><b>VRE</b> Velocity Real Estate</div>
+          <div class="bar-track" style="width:46.1%"><div class="seg s25" style="width:62.3%" data-tip="2025: 182"></div><div class="seg s26" style="width:37.7%" data-tip="2026 YTD: 110"></div></div>
+          <div class="val">292</div></div>
+        <div class="bar-row"><div class="lbl"><b>VEQ</b> Vero Equity</div>
+          <div class="bar-track" style="width:23.2%"><div class="seg s25" style="width:49.7%" data-tip="2025: 73"></div><div class="seg s26" style="width:50.3%" data-tip="2026 YTD: 74"></div></div>
+          <div class="val">147</div></div>
+        <div class="bar-row"><div class="lbl"><b>VROI</b> Velocity ROI</div>
+          <div class="bar-track" style="width:13.2%"><div class="seg s25" style="width:81%" data-tip="2025: 68"></div><div class="seg s26" style="width:19%" data-tip="2026 YTD: 16"></div></div>
+          <div class="val">84</div></div>
+        <div class="bar-row"><div class="lbl"><b>ALI</b> Artisan Logistics</div>
+          <div class="bar-track" style="width:5.8%"><div class="seg s25" style="width:73%" data-tip="2025: 27"></div><div class="seg s26" style="width:27%" data-tip="2026 YTD: 10"></div></div>
+          <div class="val">37</div></div>
+        <div class="legend">
+          <span class="key"><span class="swatch s25"></span> 2025 (full year — not closed)</span>
+          <span class="key"><span class="swatch s26"></span> 2026 year-to-date</span>
+        </div>
+      </div>
+
+      <div class="chart">
+        <h3>Account-level issues — 46 total</h3>
+        <div class="chart-sub">Balance-level problems (wrong account, missing liability, plug balances) from the “Account Issues” tab.</div>
+        <div class="tbl-scroll" style="border:none">
+          <table>
+            <thead><tr><th>Entity</th><th class="num">Issues</th><th>Books basis</th><th>Headline item</th></tr></thead>
+            <tbody>
+              <tr><td class="nowrap"><b>WCO</b></td><td class="num">16</td><td>Accrual</td><td>~$91k of card charges never entered; missing 2025–26 HELOC activity</td></tr>
+              <tr><td class="nowrap"><b>VROI</b></td><td class="num">12</td><td>Accrual</td><td>~$79k of land-note debt missing from the balance sheet</td></tr>
+              <tr><td class="nowrap"><b>VRE</b></td><td class="num">7</td><td>Accrual</td><td>~$229k of mortgage payments never split to interest expense</td></tr>
+              <tr><td class="nowrap"><b>VEQ</b></td><td class="num">5</td><td>Cash</td><td>partner checks booked without payees / character</td></tr>
+              <tr><td class="nowrap"><b>ALI</b></td><td class="num">5</td><td>Cash</td><td>~$98k unapplied cash across 2025–26; $88.5k L&amp;P under Personnel</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="legend" style="margin-top:10px">
+          <span class="chip high">HIGH — blocks accurate financials</span>
+          <span class="chip med">MEDIUM — distorts reporting</span>
+          <span class="chip low">LOW — cleanup</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="phase1">
+    <div class="sec-head"><h2>Phase 1 — quick wins for Dave</h2><div class="sub">fully specified · no CPA ruling needed · ≈ one focused day</div></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>#</th><th>Item</th><th class="nowrap">Est.</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="nowrap">P1-01</td><td>Terra Notes: bank rule + reclass 34 payments (~$4,087) from Software to the Wilkes County NC land note</td><td class="nowrap">15 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-02</td><td>VEQ “Other Income” $1,102 → reclass to sign-expense reimbursement</td><td class="nowrap">5 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-03</td><td>WCO “VELOCITY ROI LLC LOAN” $15,600.71 → reclass to investment in VROI</td><td class="nowrap">5 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-04</td><td>Book the Steve David liability ($14,734) in VROI</td><td class="nowrap">10 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-05</td><td>Deactivate ~15 dormant zero-balance accounts (listed in Account Issues, LOW)</td><td class="nowrap">15 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-06</td><td>TD 7736 close-out: $4,308.44 distribution at 12/31/25; strip 2026 personal activity; deactivate</td><td class="nowrap">30–45 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-07</td><td>Book the 8 VEQ checks as partner distributions (payees documented from check images) — <em>7/27: booked to Partner distributions ✓, but payee names still need correcting (Gregory's and FourSix's checks are labeled "Doug Wilkes")</em></td><td class="nowrap">30 min</td><td><span class="chip med">PARTIAL</span></td></tr>
+          <tr><td class="nowrap">P1-08</td><td>Enter the $800/mo owner contributions in VROI (both partners' sides)</td><td class="nowrap">20 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-09</td><td>VRE: reattribute $2,200 + $8,900 from “Inter Company Loan – Velocity ROI” to WCO contribution</td><td class="nowrap">10 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-10</td><td>Add the Whaley note payable (~$23,800) on 751 Farrowood; point the $200/mo at it</td><td class="nowrap">20 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-11</td><td>Enter missing 2025–26 HELOC draws/paydowns (17 items, list filed in the WCO folder)</td><td class="nowrap">45–60 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-12</td><td>Clear WCO Payroll parent-account credit (−$6,810.72) into subs using the Merrill report</td><td class="nowrap">20 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-13</td><td>Capitalize the 2022 RAM 1500: $47,493 asset + $15,000 owner contribution (GMC trade) + HELOC draw</td><td class="nowrap">20 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-14</td><td>Move the 12/5/24 Everland $35,000 out of “Partner investments: Wilkes Company” to the note-sale account</td><td class="nowrap">5 min</td><td><span class="chip open">OPEN</span></td></tr>
+          <tr><td class="nowrap">P1-15</td><td>Sweep WCO's VEQ deposits out of “Sales of Product Income” to distributions-received (2024–2026)</td><td class="nowrap">45 min</td><td><span class="chip open">OPEN</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="height:12px"></div>
+    <div class="note">Status here is a snapshot — the live status lives on the workbook's
+    <a href="https://docs.google.com/spreadsheets/d/1yReTdhwFZmGu2diE9Ygc0SlUNFeXF7Yq/edit" target="_blank" rel="noopener">Assignments &amp; Notes tab</a>.
+    Phase 2 (the remaining Account Issues and the 1,194-row classification sweep) starts once Phase 1 clears.</div>
+  </section>
+
+  <section id="vre2024">
+    <div class="sec-head"><h2>VRE 2024 — the expense allocation</h2><div class="sub">built 8/4 from the ledger, answered item by item</div></div>
+    <p class="note">Accruity asked whether VRE's 2024 expenses should simply be spread <em>pro-rata</em> across the five houses.
+    The answer is no — most of the dollars are directly identifiable, and two projects with <b>different tax rule sets</b> overlap
+    in the same Feb–April window. $63,000 of the $72,464 has now been placed.</p>
+    <div style="height:14px"></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Where it belongs</th><th class="num">Amount</th><th>Treatment</th></tr></thead>
+        <tbody>
+          <tr><td><b>316 Autumn Mist</b> — fit-out</td><td class="num">$26,844</td><td>Purchased <b>3/5/2024</b>, first leased 6/17 — so this spend is all <b>pre-placed-in-service</b>. Furnishings are 5–7 yr property (bonus/§179); paint, materials and fit-out labor capitalize into basis rather than deducting.</td></tr>
+          <tr><td><b>10 Carroll Ct</b> — post-eviction turn</td><td class="num">$10,807</td><td>Carroll stayed <b>in service</b> (vacant between tenants), so normal repair-vs-improvement rules apply. HVAC $5,250 capitalizes; appliances and fence get bonus; paint and plumbing may deduct.</td></tr>
+          <tr><td>Property-specific — tax &amp; insurance</td><td class="num">$10,885</td><td>Farrowood and Carroll property tax paid directly; check 103 is insurance for Carroll + Arundel.</td></tr>
+          <tr><td>Rental-acquisition search costs</td><td class="num">$5,789</td><td>Lead-gen tools used to find rentals to buy. Deductible expansion cost, or capitalize the part that led to Autumn Mist — David rules.</td></tr>
+          <tr><td>Genuine VRE overhead</td><td class="num">$4,544</td><td>The only bucket where pro-rata is appropriate.</td></tr>
+          <tr><td>Multi-entity</td><td class="num">$2,807</td><td>A non-US contractor whose work spanned the entities — only VRE's share belongs here.</td></tr>
+          <tr><td>Meals / needs a ruling</td><td class="num">$1,303</td><td>Restaurant charges, plus the Robuilt education question.</td></tr>
+          <tr><td>Still to identify</td><td class="num">$9,485</td><td>All items under $700 — being worked through one at a time.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="height:16px"></div>
+    <div class="sec-head" style="margin-top:8px"><h2 style="font-size:19px">What the walkthrough turned up</h2><div class="sub">findings, not tidying</div></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Finding</th><th>Why it matters</th></tr></thead>
+        <tbody>
+          <tr><td><b>Insurance and some property tax are escrowed inside the mortgage payments</b></td><td>Explains why VRE's whole 2024 insurance account holds $15.00, and a $4,810 property-tax gap. Splitting the ~$96,655 of mortgage payments per the 1098s <em>and</em> escrow statements recovers <b>three</b> deductions at once — interest, tax, insurance.</td></tr>
+          <tr><td><b>Terra Notes decoded — it's Wolcott, LLC</b></td><td>$15,000 on a Wilkes County NC parcel: interest-only, then converted 7/18/2025 to a 14% amortizing note. The "$15,000 payoff" was a paper conversion, not cash. A reconstructed amortization schedule now matches the servicer's payoff to the penny — and the <b>$15,000 note payable is absent</b> from VROI's balance sheet.</td></tr>
+          <tr><td><b>VROI's land basis is understated</b></td><td>Land <em>is</em> capitalized ($157,017 at 12/31/24) but only at cash paid. The unbooked seller notes — Wolcott $15k, Cherokee ~$65k, five Everland parcels — mean <b>gain is overstated when parcels sell</b>.</td></tr>
+          <tr><td><b>$3,000 earnest money expensed</b></td><td>Autumn Mist's deposit sat in Misc Expenses while the HUD already includes it in the $212,342.66 price — a live double-count risk.</td></tr>
+          <tr><td><b>A $2,500 Artisan intercompany error</b></td><td>Knox &amp; Magnolia furnished Autumn Mist but were paid from Artisan Logistics. Artisan's 2024 return is already filed, so both sides need review.</td></tr>
+          <tr><td><b>$1,308 of credit card rewards booked as income</b></td><td>Recurring across 2024 and 2025. Rewards are a purchase rebate — never rental income on Form 8825.</td></tr>
+          <tr><td><b>A non-US contractor paid via Payoneer</b></td><td>No 1099 due, but a W-8BEN should be on file and withholding depends on where the work was performed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="rulings">
+    <div class="sec-head"><h2>Settled rulings</h2><div class="sub">decided — cite the Q&amp;A #, don't re-litigate</div></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Ruling</th><th>Cite</th></tr></thead>
+        <tbody>
+          <tr><td>VEQ partner checks = <b>partner distributions</b> — never income at WCO, never commissions expense; income arrives via K-1</td><td class="nowrap">Q&amp;A #6, #13</td></tr>
+          <tr><td>TD Bank 7736: business through 12/31/2025, personal from 1/1/2026; $4,308.44 conversion balance = shareholder distribution</td><td class="nowrap">Q&amp;A #1</td></tr>
+          <tr><td>HELOC is in Doug's personal name but <b>all proceeds are business</b>; David is moving it onto the business books</td><td class="nowrap">Q&amp;A #2</td></tr>
+          <tr><td>Chase 4654: <b>PROVEN from the statements</b> — paid off in full 2/14/2025, true balance $0. The $91,642.95 on the books is a wrong opening balance plus the payoff entered twice</td><td class="nowrap">Q&amp;A #4, #22</td></tr>
+          <tr><td>All WCO→VROI money ("LOAN" account and the $800/mo pulls) = <b>owner capital contributions</b>, not loans</td><td class="nowrap">Q&amp;A #8, #11</td></tr>
+          <tr><td>“Terra Notes, LLC / Terra Note …” in any bank feed = payment on VROI's Wilkes County NC <b>land note</b> — never software</td><td class="nowrap">vendor rule</td></tr>
+          <tr><td>Dec 2024 sale of ten owner-finance notes to Everland for $70,203.37 = <b>disposition of installment obligations</b>; David computes the gain</td><td class="nowrap">Forensic #3</td></tr>
+          <tr><td>2022 RAM 1500 (GVWR 7,100 lb): company truck from 9/9/2025; split-year vehicle plan — standard mileage on the personal vehicle Jan 1–Sep 8 (≈$10,011), then company-truck actual/§179</td><td class="nowrap">Q&amp;A #25</td></tr>
+          <tr><td>401k: one Merrill plan (#762633); deferrals are Doug's money, only the employer match is company expense; the $33k participant loan funded a shareholder loan to WCO</td><td class="nowrap">Q&amp;A #10</td></tr>
+          <tr><td>ALI keeps <b>cash-basis</b> books and reports (owner ruling 7/22/26)</td><td class="nowrap">7/22/26</td></tr>
+          <tr><td>2025 is <b>not closed</b> — 2025 corrections go in before David prepares the 2025 returns</td><td class="nowrap">standing</td></tr>
+        
+          <tr><td><b>All five entities are CASH BASIS</b> — supersedes the old accrual designations on WCO, VRE and VROI. Every QBO scheduled report must be set to cash</td><td class="nowrap">Doug 8/4/26</td></tr>
+          <tr><td><b>Both owners are real estate professionals</b> (Doug / Southern Visions, Randy / Wolfe Real Estate) — rental losses are NON-PASSIVE. Settled; not to be re-argued</td><td class="nowrap">Doug 8/5/26</td></tr>
+          <tr><td><b>316 Autumn Mist placed in service 5/19/2024</b> — listing photos 5/5, Furnished Finder live 5/19. A cost seg study exists: land $36,219.68 · building $140,725.86 · 15-yr $11,816.64 · 5-yr $23,580.81</td><td class="nowrap">Doug 8/5/26</td></tr>
+          <tr><td><b>Steve David's $70,000 was a 0% LOAN, not equity</b> — repaid $55,266.00, $14,734.00 still owed. He was a lender; the separate $65,396 check repaid his distinct Cherokee note at 10.10%</td><td class="nowrap">Doug 8/5/26</td></tr>
+          <tr><td><b>The RAM 1500 is a 2025 asset, not 2024</b> — bought 9/9/2025 by Wilkes Company, cash, funded by a $39,880.00 HELOC advance. Depreciable basis <b>$48,051.00</b>; the $2,400 service contract is a separate prepaid over 84 months</td><td class="nowrap">8/6/26 packet</td></tr>
+          <tr><td>&ldquo;<b>Elevated Exteriors</b>&rdquo; in any HELOC feed = a QuickBooks payee RULE, not a vendor doing work — auto-stamped on 70 of 74 balance advances. Delete the rule</td><td class="nowrap">vendor rule</td></tr>
+          <tr><td>The two $2,586.16 legs of the McCormick note sale = <b>member distributions</b>, not fees — not deductible to VROI</td><td class="nowrap">Doug 8/5/26</td></tr>
+          <tr><td>VROI penalty: <b>use First-Time Abatement</b> and close it out — Rev. Proc. 84-35 was considered and declined</td><td class="nowrap">Doug 8/4/26</td></tr>
+          <tr><td>Vendor→property rules: W. Columbia Utilities = Florentine · City of Cayce = Autumn Mist · Dominion acct …4 = Autumn Mist</td><td class="nowrap">Doug 8/5/26</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="forensics">
+    <div class="sec-head"><h2>Forensic findings</h2><div class="sub">from the lifetime general ledgers — full evidence in the workbook</div></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>#</th><th>Entity</th><th>Finding</th><th>Severity</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>VROI</td><td>$30,000 “Asset adjustment” plug = two Aug-2023 payments from Wilkes Co parked and forgotten</td><td><span class="chip high">HIGH</span></td></tr>
+          <tr><td>2</td><td>VROI</td><td>$78,810 of partner-loan repayments (Wolfe, Steve David) paid out with no loan liability ever set up</td><td><span class="chip high">HIGH</span></td></tr>
+          <tr><td>3</td><td>VROI</td><td>Dec-2024 ten-note package sale to Everland ($70,203.37): first $35,000 misbooked to partner equity</td><td><span class="chip high">HIGH</span></td></tr>
+          <tr><td>4</td><td>VROI</td><td>Accumulated depreciation carries a $15,031 <i>debit</i> from a 12/31/2023 journal entry</td><td><span class="chip med">MEDIUM</span></td></tr>
+          <tr><td>5</td><td>VRE</td><td>~$229k of mortgage payments (2023–2026) sit in the Mortgages liability parent — <b>no mortgage interest expense has ever been recorded</b>; split per 1098s</td><td><span class="chip high">HIGH</span></td></tr>
+          <tr><td>6</td><td>VRE</td><td>All five properties entered as opening balances — the source of the $384,392 Opening Balance Equity</td><td><span class="chip high">HIGH</span></td></tr>
+          <tr><td>7</td><td>WCO</td><td>HELOC activity: 2024 fully recorded; from Jan 2025 only the Chase payoff was booked — 17 items missing</td><td><span class="chip high">HIGH</span></td></tr>
+          <tr><td>8</td><td>WCO</td><td>The 2022 RAM 1500 appears nowhere in the fixed assets — truck never capitalized</td><td><span class="chip high">HIGH</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  
+  <section id="statements2026">
+    <div class="sec-head"><h2>What the bank statements proved</h2><div class="sub">4&ndash;6 August 2026 &mdash; the books tested against source documents for the first time</div></div>
+
+    <p style="margin:14px 0 18px 0">Until this week nothing had been checked against a bank statement. Doug supplied the full Chase, US&nbsp;Bank, PCFCU, Amex and TD&nbsp;HELOC history, and the picture changed materially. <b>Of six Wilkes Company accounts tested, exactly one tied to the bank</b> &mdash; the savings account holding a static&nbsp;$25.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Account</th><th>What the books said</th><th>What the bank says</th><th>The error</th></tr></thead>
+        <tbody>
+          <tr><td><b>Chase-4654</b></td><td>$91,642.95 asset at 12/31/25</td><td><b>$0</b> &mdash; paid off 2/14/2025</td><td class="nowrap">entirely fictitious</td></tr>
+          <tr><td><b>US Bank 9098</b></td><td>$737.26 asset</td><td>$3,975.55 <b>owed</b></td><td class="nowrap">$4,712.81, wrong side</td></tr>
+          <tr><td><b>PCFCU 2209</b></td><td>&minus;$36,178.79</td><td><b>never went negative</b> &mdash; closed 2024 at $4,715.53</td><td class="nowrap">fictitious</td></tr>
+          <tr><td><b>TD HELOC</b></td><td>+$15,605 of 2025 activity</td><td>+$44,436.95 of 2025 activity</td><td class="nowrap">$28,831.52</td></tr>
+          <tr><td>PCFCU savings</td><td>$25.00</td><td>$25.00</td><td class="nowrap">&#10003; correct</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:26px 0 8px 0">The mechanism &mdash; why nobody caught it</h3>
+    <p>Doug's master statement tracker dates it precisely: <b>reconciliation stopped after 2/29/2024 on VROI and July 2024 on VRE</b>, and TD HELOC statements read &ldquo;Requested&rdquo; every month of 2023 and 2024 and were <b>never received</b>. The account-type flips and drifting balances all happened inside a window where nothing was being tied to a statement. The fix is not four corrections &mdash; it is restarting monthly reconciliation.</p>
+
+    <h3 style="margin:26px 0 8px 0">The HELOC &mdash; 16 transactions missing, 5 phantom entries</h3>
+    <p>The full TD export from account opening (250 transactions, May 2022 onward) reconciles to the penny against the error analysis:</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>2025 reconciliation</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>Bank net change</td><td class="nowrap">+44,436.95</td></tr>
+          <tr><td>Book net change</td><td class="nowrap">+15,605.43</td></tr>
+          <tr><td><b>Gap</b></td><td class="nowrap"><b>28,831.52</b></td></tr>
+          <tr><td>Missing bank transactions (16, incl. $39,880 · $9,975 · $5,505)</td><td class="nowrap">+56,665.27</td></tr>
+          <tr><td>Less phantom book entries (5, incl. the $45,262.75 duplicate)</td><td class="nowrap">&minus;27,833.75</td></tr>
+          <tr><td><b>= ties exactly</b></td><td class="nowrap"><b>28,831.52</b> &#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px">The 2025 year-end lands within <b>$72</b> of the books &mdash; but that is two large errors cancelling, not accuracy. The opening balance is overstated by roughly $28,900 and the year's own errors run the other way, so the year-end looks right by accident while every month inside it is wrong.</p>
+
+    <h3 style="margin:26px 0 8px 0">Where the big HELOC draws went</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Date</th><th>Amount</th><th>Where it went</th></tr></thead>
+        <tbody>
+          <tr><td class="nowrap">9/10/2025</td><td class="nowrap">$39,880.00</td><td><b>the check for the RAM 1500</b> &mdash; matches the buyers order to the penny</td></tr>
+          <tr><td class="nowrap">9/29/2025</td><td class="nowrap">$10,021.27</td><td>drawn to TD checking, paid to <b>Bank of America</b> 9/30</td></tr>
+          <tr><td class="nowrap">5/06/2025</td><td class="nowrap">$9,975.00</td><td><b>Ameris 4502</b> card payment</td></tr>
+          <tr><td class="nowrap">1/21/2025</td><td class="nowrap">$5,505.44</td><td><b>Marcus GM</b> card payoff</td></tr>
+          <tr><td class="nowrap">1/21/2025</td><td class="nowrap">$45,262.75</td><td><b>Chase-4654</b> payoff &mdash; entered twice in the books</td></tr>
+          <tr><td class="nowrap">2/08/2024</td><td class="nowrap">$40,500.00</td><td><b>loan to Artisan Logistics</b>, repaid 4/12/2024</td></tr>
+          <tr><td class="nowrap">5/19/2023</td><td class="nowrap">$20,623.01</td><td>the four card payoffs the bookkeeper could never trace &mdash; <b>solved</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:26px 0 8px 0">The truck, end to end</h3>
+    <p><b>9/09/2025</b> &mdash; 2022 RAM 1500 Rebel bought by Wilkes Company LLC, cash, from Carolina Chrysler. 2017 GMC Sierra traded in for $15,000 with $4,429 owed to Palmetto Citizens paid off in the deal. &nbsp;<b>9/10/2025</b> &mdash; HELOC advance $39,880.00 funds the check. &nbsp;<b>11/17/2025</b> &mdash; solo 401(k) loan $32,925.00 arrives. &nbsp;<b>11/20/2025</b> &mdash; $33,000 repays the HELOC. Depreciable basis <b>$48,051.00</b>; 100% bonus likely available for 2025. The GMC was <b>traded, not available to contribute</b> &mdash; David needs its original cost to compute gain or loss.</p>
+
+    <h3 style="margin:26px 0 8px 0">2024 mortgage interest &mdash; now complete</h3>
+    <p>All five Forms 1098 are in hand. Florentine $17,487.46 &middot; Autumn Mist $16,801.21 &middot; Arundel $13,597.73 &middot; Carroll $11,342.28 &middot; Farrowood $6,404.40 &middot; Whaley 2nd $0. <b>Total $65,633.08</b> &mdash; none of it ever deducted on VRE's books.</p>
+  </section>
+
+  <section id="docs">
+    <div class="sec-head"><h2>Where everything lives</h2><div class="sub">all in the shared Google Drive — Dave and David have editor access</div></div>
+    <div class="doclist">
+      <div class="doc"><a href="https://docs.google.com/spreadsheets/d/1yReTdhwFZmGu2diE9Ygc0SlUNFeXF7Yq/edit" target="_blank" rel="noopener">Classification Review workbook</a><div class="d">The working file: assignments, Q&amp;A, issues, forensics, 1,194 flagged transactions, COA mapping proposal</div></div>
+      <div class="doc"><a href="https://drive.google.com/file/d/1LkfEUowGbSmQ8XAOwzOLZMmw6mpYG2lj/view" target="_blank" rel="noopener">Accountant Handoff Memo</a><div class="d">Narrative version: history, compounding issues, and each person's work orders</div></div>
+      <div class="doc"><a href="https://drive.google.com/drive/folders/14GLIA_nI0OSoraYAgmtAAouItakfJ56V" target="_blank" rel="noopener">Accounting folder (root)</a><div class="d">Entity/year report archives, closing docs, vehicle packet, 401k records, audit file, logs</div></div>
+      <div class="doc"><a href="https://docs.google.com/spreadsheets/d/1aciYM8kkJDojbqzytj0_Dafh-hgj-H53J0ywbnbCGK8/edit" target="_blank" rel="noopener">REPS Hours Log 2026</a><div class="d">Doug's contemporaneous real-estate-professional hours record</div></div>
+      <div class="doc"><a href="https://docs.google.com/spreadsheets/d/1uT-8Uqjr_MvURKb8NJnxwwDWSyr1hWtrlwmKKjeRuUA" target="_blank" rel="noopener">VROI bills &amp; loans tracker</a><div class="d">Land-lender schedule, Steve David payoff, $800/mo contributions</div></div>
+      <div class="doc"><a href="https://docs.google.com/spreadsheets/d/1CuXDgakyW5b6dnpigBc5DSUhaFmj0GilgHEAIPjglIs" target="_blank" rel="noopener">VRE bills tracker</a><div class="d">Servicer→property map, rents, security deposits, Whaley note terms</div></div>
+      <div class="doc"><a href="https://docs.google.com/spreadsheets/d/1aoSIEQSRz0ZsKW7kxWeHSEK8e2OUM08pfRmOX2bADWE" target="_blank" rel="noopener">Everland note-package sheet</a><div class="d">The ten notes sold Dec 2024 — per-note balances for the gain calculation</div></div>
+      <div class="doc"><a href="https://drive.google.com/drive/folders/1nj-h4jnMxoKN9N9TEx5bN7c4cz1F-PJV" target="_blank" rel="noopener">VRE closing docs &amp; in-service dates</a><div class="d">All five purchase HUDs, the 2023 refi HUDs (the debt trail for the VROI→VRE transfers), deeds, and the purchase/in-service date summary for depreciation</div></div>
+      <div class="doc"><a href="https://drive.google.com/file/d/1JNMp-Usb8eSQh24hsOpsiTIO4fDYWFC6/view" target="_blank" rel="noopener">VRE 2024 P&amp;L by property (draft)</a><div class="d">Income and mortgage payments split per house for the 8825 columns; expenses pending QBO class tracking</div></div>
+      <div class="doc"><a href="https://drive.google.com/file/d/15LEfuf2GdIB_k0aWnEkk0MqaUrxJSbe5/view" target="_blank" rel="noopener">VRE 2024 expense allocation</a><div class="d">Every 2024 expense placed by property with the evidence for each, plus the buckets needing a ruling</div></div>
+      <div class="doc"><a href="https://drive.google.com/drive/folders/1OpfcHZn40r3Gf-whBdIVOilxVg86ZeSQ" target="_blank" rel="noopener">VROI land notes &amp; closing docs</a><div class="d">The seller-carry notes missing from VROI's balance sheet — Wolcott/Terra amortization schedule plus what to request from Cherokee and Everland</div></div>
+      <div class="doc"><a href="https://docs.google.com/spreadsheets/d/1BaBxfYFr8REbMhqIetOLTw5HeIUFWEk4/edit" target="_blank" rel="noopener">Card &amp; account statement tracker (v2)</a><div class="d">Every bank account and card across all entities: master list with statement-folder links, month-by-month status log with dropdowns, and a computed gaps report</div></div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="note">The workbook's <b>Document Index tab</b> links every remaining source document — HUDs and
+    closing statements, the SCDEW audit letters, the truck bill of sale, mileage logs, and 401k statements.</div>
+  </section>
+
+  <section id="howto">
+    <div class="sec-head"><h2>Working in this system</h2><div class="sub">the weekly rhythm</div></div>
+    <ol class="steps">
+      <li><b>Monday:</b> the pipeline files fresh QBO reports for every entity into the Drive folder automatically.</li>
+      <li><b>Dave</b> works items from the Assignments &amp; Notes tab (Phase 1 first), makes the entries in QBO, and marks the row DONE with a note.</li>
+      <li><b>Doug + Claude</b> verify DONE items against the next Monday's fresh reports — corrections show up in the data within a week, so nothing stays "done" on trust alone.</li>
+      <li><b>David</b> resolves the tax-treatment questions routed to him on the same tab; his rulings get added to the Settled Rulings list so they're never re-argued.</li>
+      <li><b>Anyone</b> with a new question or discovery adds a row to Assignments &amp; Notes — that tab is the single queue for the whole engagement.</li>
+    </ol>
+    <div style="height:14px"></div>
+    <div class="callout"><b>Ground rules:</b> 2025 is not closed — book corrections into 2025 freely.
+    Don't rename accounts from the COA Mapping tab yet; it's a proposal awaiting David's review. When a
+    bank feed shows “Terra Notes,” it's the land note. When in doubt, ask on the Assignments tab rather
+    than guessing — every settled ruling above started as a question.</div>
+  </section>
+
+  <footer>
+    Wilkes Company LLC &amp; Portfolio · Accounting Operations Hub · snapshot 7/22/2026 ·
+    maintained by Doug Wilkes with Claude · live data lives in the Classification Review workbook and the shared Drive folder.
+  </footer>
+
+</div>
+</body></html>
